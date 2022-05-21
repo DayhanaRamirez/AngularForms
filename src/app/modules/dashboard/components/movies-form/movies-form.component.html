@@ -1,0 +1,27 @@
+<form [formGroup]="moviesForm" (ngSubmit)="onSubmit()" >
+    <mat-form-field appearance="legacy" >
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="type" (selectionChange)="onChangeEvent($event.value)">
+            <mat-option [value]="null" disabled>Select type</mat-option>
+            <mat-option *ngFor="let category of myCategories" [value]="category.name">{{category.name | titlecase}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="form__input" appearance="legacy">
+        <mat-label>{{moviesForm.value.type | customLabel }}</mat-label>
+        <input type="text" matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field class="form__input" appearance="legacy">
+        <mat-label>Year</mat-label>
+        <input type="text" matInput formControlName="year" appYearFormat>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="moviesForm.invalid">Search</button>
+</form>
+ 
+<pre>
+    {{moviesForm.value | json}}
+    {{moviesForm.status}}
+</pre>
+
+
+
+
